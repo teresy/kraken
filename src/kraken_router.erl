@@ -132,7 +132,7 @@ enqueue_buffered_messages(WPid, Horizon, RequestedTopics) ->
             [failure | MsgAcc];
           true ->
             % Concat the messages to ones from other shards
-            lists:append(Messages, MsgAcc)
+            Messages ++ MsgAcc
         end
     end
   end, [], Shards),
@@ -321,7 +321,7 @@ router_fold(Fun, Acc) ->
 router_aggregate(Fun) ->
   router_fold(fun(Router, Acc) ->
         R = Fun(Router),
-        lists:append(Acc, R)
+        Acc ++ R
     end, []).
 
 router_map(Fun) ->

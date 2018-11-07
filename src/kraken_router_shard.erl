@@ -159,7 +159,7 @@ handle_call({get_buffered_msgs, RequestedTimestamp, ShardTopics}, _From,
               if ContainsTopic ->
                   SubQueue = dict:fetch(Topic, QueueMap),
                   FilteredMessages = get_messages_above_limit(SubQueue, RequestedTimestamp, []),
-                  lists:append(AccIn, FilteredMessages);
+                  AccIn ++ FilteredMessages;
                 true ->
                   AccIn
       end

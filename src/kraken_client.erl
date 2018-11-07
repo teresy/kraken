@@ -137,7 +137,7 @@ assert_receive(Results, ExpectedResults, _Socket, 0) ->
   assert_received_messages(Results, ExpectedResults);
 
 assert_receive(Results, ExpectedResults, Socket, MaxTimeMillis) ->
-  NewResults=lists:append(Results, kraken_client:receive_messages(Socket)),
+  NewResults=Results ++ kraken_client:receive_messages(Socket),
   if
     length(NewResults) < length(ExpectedResults) ->
       timer:sleep(?SLEEP_TIME),
